@@ -3,11 +3,11 @@ title: "Chapter 7: Classes"
 description: How to define your own types and why. 
 ---
 
-# Chapter 7: Packages, Modules and Imports
+# Chapter 7: Classes
 
 ## Chapter objectives
 
-Classes are a very important concept for writing a full-fledged application in Python rather than just a little script because they will help keep your code clean and robust.
+Classes are a very important concept for writing a full-fledged application in Python because they will help keep your code clean and robust.
 
 In this chapter you will learn:
 
@@ -75,7 +75,7 @@ print(Dog)
 print(my_dog)
 ``` 
 
-You should see that Dog is a clasa and as for my_dog - 
+You should see that Dog is a class and as for my_dog - 
 we haven't defined a nice text representation for Dogs, so it will print out something like `<__main__.Dog object at 0x000001F6CBBE7BB0>`. 
 
 ### Class naming convention
@@ -112,7 +112,7 @@ But setting new attributes in this way is not ideal. We want every instance of t
 
 When we put a function on our object, it's known as a **method**. Technically it's also still an attribute, but you will usually stick to calling the variables "attributes" and the functions "methods".
 
-Define a function called `__init__` inside the class. The function name needs to be exactly "__init__", and then it will automatically be in charge of creating new instances. We no longer want the `pass` keyword because the class is not empty anymore.
+Define a function called `__init__` inside the class. The function name needs to be exactly "`__init__`", and then it will automatically be in charge of creating new instances. We no longer want the `pass` keyword because the class is not empty anymore.
 
 ```python
 class Dog:
@@ -155,7 +155,7 @@ print(f"Second dog: {spot.name}")
 
 </details> 
 
-> The double underscores in the function name "__init__" indicate that it is a **magic method**. These are specific method names that get called implicitly by Python. Many other magic methods exist - for example, if you want a nice string representation of your class (useful for logging or debugging), define a method called `__str__` that takes `self` and returns a string.
+> The double underscores in the function name "`__init__`" indicate that it is a **magic method**. These are specific method names that get called implicitly by Python. Many other magic methods exist - for example, if you want a nice string representation of your class (useful for logging or debugging), define a method called `__str__` that takes `self` and returns a string.
 
 ### Exercise 7.1
 
@@ -269,7 +269,7 @@ dictionary_data = {
 
 Note:
 - The three arguments should be passed to the constructor in the correct order.
-- The dictionary uses the key "text" instead of "content". 
+- The dictionary uses the key "main_text" instead of "content". 
 
 ```python
 my_publication = Publication(dictionary_data['author'], dictionary_data['title'], dictionary_data['main_text'])
@@ -431,7 +431,7 @@ If you try to access `my_instance.class_attribute`, it will first check if an in
 This could be useful for a variety of reasons:
 - Storing class constants. For example, all dogs do have the same species name so you could set a class attribute `scientific_name = 'canis familiaris'`.
 - Tracking data across all instances. For example, keep a count of how many dogs there are in total.
-- Defining default values. For example, when you construct a new dog, maybe you want 
+- Defining default values. For example, when you construct a new dog, maybe you want to set a `plays_well_with_cats` variable to false by default, but individual dogs could choose to override this.
 
 ### Exercise 7.6
 
