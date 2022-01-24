@@ -26,35 +26,15 @@ Say you define a `Dog` class. This is where you decide what it means to be a Dog
 - What data is associated with each Dog?
 - What can a Dog do?
 
-Someone's pet dog is an **instance** of that class (an object of type `Dog`).
+Someone's pet dog is an **instance** of that class (an object of type `Dog`). You use the class to construct instances.
 
-Data or functions can be stored on the class itself or on individual instances. But in general, the class will define how the object looks/behaves and then you will provide specific data to an instance.
+Data or functions can be stored on the class itself or on individual instances, but the class generally defines how the object looks/behaves and then you provide specific data to instances.
 
-There are multiple reasons classes are useful. They will help you to follow some of the principles of "good" object-oriented programming, such as the five "SOLID" principles, which are covered in detail in module 2 of the course. But here are two fundamental uses of classes:
+> You could also think of the difference between "class" and "instance" like the difference between a recipe and a cooked meal. A recipe won't fill you up but it could tell you the necessary ingredients and the number of calories. The `Dog` class can't chase a ball, but it can define how dogs do chase balls.
 
-### Group variables together into entities
-
-You don't want to pass around multiple variables (like `dog_name`, `owner`, `breed` etc) for each dog that passes through the system. So group them together into a single entity (a `Dog`). Data classes are simple classes that hold data and don't necessarily provide any functionality beyond that.
-
-This _could_ be achieved with a dictionary but a class is more robust. The class definition is a single source of truth for what it means to be a Dog. You can ensure that every Dog in your system has the same shape. Dictionaries are less reliable - key/value pairs can be added/removed at any point and it's not obvious where to look to find out what your dictionary must/can contain.
-
-You can also for example make some of the dog's data constant or optional, without causing bugs because it's clearly laid out in the definition of Dog.
-
-### Linking functionality with state
-
-In Python, you could put all of your dog-related functions in a "dog_functions.py" module. But putting it into the Dog class could be nicer. E.g. say you want a function `is_healthy_weight` that tells you whether an individual dog is healthy based on the data you hold about it. Putting it in a module means you need something like this:
-
-```python
-import dog_functions
-
-my_dog_is_healthy = dog_functions.is_healthy_weight(my_dog)
-```
-
-If the function is part of the Dog class, then using it looks like this:
-
-```python
-my_dog_is_healthy = my_dog.is_healthy_weight()
-```
+There are multiple reasons classes are useful. They will help you to follow some of the principles of "good" object-oriented programming, such as the five "SOLID" principles, which are covered in detail in module 2 of the course. But fundamentally a class does two things:
+- Store data on an object ("attributes")
+- Define functions alongside that data/state ("methods")
 
 ## Defining a class
 
@@ -75,18 +55,27 @@ print(Dog)
 print(my_dog)
 ``` 
 
-You should see that Dog is a class and as for my_dog - 
-we haven't defined a nice text representation for Dogs, so it will print out something like `<__main__.Dog object at 0x000001F6CBBE7BB0>`. 
+You should see:
+- `Dog` is a class (`<class '__main__.Dog'>`)
+- `my_dog` is a Dog (`<__main__.Dog object at 0x000001F6CBBE7BB0>`)
+    - The long hexadecimal number is a memory address (it will vary) but it usually won't be of interest
+    - You can define your own text representation for your class, but we haven't yet.
 
 ### Class naming convention
 
-In Python, any class names you define should be in `PascalCase`. The first letter of each word should be capitalised, including the first, and no underscores should be used. It is sometimes also called "CamelCase" but that is ambiguous - `camelCase` can have a lowercase first letter.
+In Python, any class names you define should be in `PascalCase`. This isn't a *requirement*, but will help developers read the code. The first letter of each word should be capitalised, including the first, and no underscores should be used. It is sometimes also called "CamelCase" but that is ambiguous - `camelCase` can have a lowercase first letter.
 
 The different naming convention compared to variables and functions (which use `snake_case`) should help you keep track of whether you're handling a class definition or an instance of that class. You can write `dog = Dog()` and be sure the "dog" variable is an instance and "Dog" is the class itself. 
 
 > The built-in classes like `str`, `int`, `datetime` are a bit of an exception to this rule.
 
 ### Attributes
+
+You don't want to pass around multiple variables (like `dog_name`, `owner`, `breed` etc) for each dog that passes through the system. So our Dog class can be useful simply by grouping those variables together into a single entity (a `Dog`). Data classes are simple classes that hold data and don't necessarily provide any functionality beyond that.
+
+> This _could_ be achieved with a dictionary but a class is more robust. The class definition is a single source of truth for what it means to be a Dog. You can ensure that every Dog in your system has the same shape. Dictionaries are less reliable - key/value pairs can be added/removed at any point and it's not obvious where to look to find out what your dictionary must/can contain.
+
+You can also for example make some of the dog's data constant or optional, by changing the `Dog` class definition.
 
 Let's try to make the class more useful by actually storing some data in the object. Python is quite liberal and you can get/set any **attributes** you want on your instance:
 
@@ -190,8 +179,23 @@ print(f'Notification Two has been sent: {notification_two.is_sent}')
 
 </details>
 
+### Linking functionality with state
+
 Similar to the `__init__` method, you can define any other methods you want by including function definitions indented one level inside the class block. All instance methods should have at least one parameter - "self".
 
+In Python, you could put all of your dog-related functions in a "dog_functions.py" module. But putting them in the `Dog` class could be nicer. E.g. imagine you want a function `is_healthy_weight` that tells you whether an individual dog is healthy based on the data you hold about it. Putting it in a module means you need something like this:
+
+```python
+import dog_functions
+
+my_dog_is_healthy = dog_functions.is_healthy_weight(my_dog)
+```
+
+If the function is part of the Dog class, then using it looks like this:
+
+```python
+my_dog_is_healthy = my_dog.is_healthy_weight()
+```
 
 ### Exercise 7.2
 
@@ -437,6 +441,19 @@ This could be useful for a variety of reasons:
 
 Create a `Dog` class with a `count` class attribute. Every time you construct a new dog, increment this value
 
+<details markdown="1"><summary>Click here for the answer</summary>
+
+```python
+class Dog:
+    count = 0
+    
+    def __init__(self, name):
+        self.name = name
+        count += 1
+```
+
+</details> 
+
 ### Exercise 7.7
 
 ```python
@@ -518,7 +535,7 @@ class Dot(Shape):
         print('.')
 ```
 
-The key part is the `(Shape)` when we start the definition of `Dot`. We say that the `Shape` is a **base class** or **parent class** or **superclass**, while `Dot` is the **child class** or **derived class**. 
+The key part is the `(Shape)` when we start the definition of `Dot`. We say that the `Shape` is a **base class** or **parent class** or **superclass**, while `Dot` is the **derived class** or **child class** or **subclass**. 
 
 When we create a `Dot`, it inherits all of the behaviour of the parent class, `Shape`. We haven't defined an `__init__` function for Dot, so it automatically uses the parent class's one. When we construct a Dot, we have to pass in a "colour":
 
