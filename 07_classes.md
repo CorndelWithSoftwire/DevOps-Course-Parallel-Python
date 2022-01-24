@@ -499,7 +499,7 @@ There are also "static methods" in Python (`@staticmethod`) but we're not going 
 
 ## Inheritance
 
-If a programmer thinks of classes they will expect **inheritance** as well. Say you're developing a system that can draw various shapes, though for simplicity we're just going to print text to the terminal. All of your shapes have some things in common - they have a colour, a position on the canvas, etc.
+An important aspect of classes (in almost all languages) is **inheritance**. Say you're developing a system that can draw various shapes, though for simplicity we're just going to print text to the terminal. All of your shapes have some things in common - they have a colour, a position on the canvas, etc.
 
 How do you write that without copying and pasting a bunch of code between your classes?
 
@@ -543,6 +543,8 @@ class Rectangle(Shape):
 ```
 
 If you want to use a parent method, you can do so via `super()` as shown above. This is useful when you want to keep some behaviour and extend it.
+
+In this way, your code can show logical relationships between your types of objects (Rectangle inherits from Shape => "a Rectangle is a Shape"), and you can define code in one place that gets used in multiple classes. Python's classes have more features that we've not covered, for example we could use the "abstract base class" module (`abc`) to declare that the "draw" method needs to be implemented in child classes and not in the "abstract" Shape class. You could read about some features [online](https://docs.python.org/3/tutorial/classes.html) or when using classes in Module 2 of the course.
 
 ## Summary
 
