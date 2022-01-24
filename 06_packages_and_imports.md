@@ -21,7 +21,7 @@ In this chapter you will learn:
 
 The simple picture is:
 - Each Python file is a **module**
-- A folder is a **package**. If the folder contains files/subfolders, the package contain modules/subpackages.
+- A folder is a **package**. If the folder contains files/subfolders, the package contains modules/subpackages.
 - For your module (file) to access code from another, you must first **import** it
 
 By importing a module, you ensure the file has run and you get access to anything that it has defined (like variables or functions). 
